@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   title: 'Customers',
 };
 
-export default async function Page({
-  searchParams,
-}: {
+interface PageProps {
   searchParams?: {
     query?: string;
   };
-}) {
+}
+
+export default async function Page({ searchParams }: PageProps) {
   const query = searchParams?.query || '';
   const customers = await fetchFilteredCustomers(query);
 
