@@ -1,3 +1,5 @@
+// app/dashboard/customers/page.tsx
+
 import { Metadata } from 'next';
 import CustomersTable from '@/app/ui/customers/table';
 import { fetchFilteredCustomers } from '@/app/lib/data';
@@ -7,13 +9,13 @@ export const metadata: Metadata = {
   title: 'Customers',
 };
 
-interface PageProps {
+export default async function Page({
+  searchParams,
+}: {
   searchParams?: {
     query?: string;
   };
-}
-
-export default async function Page({ searchParams }: PageProps) {
+}) {
   const query = searchParams?.query || '';
   const customers = await fetchFilteredCustomers(query);
 
