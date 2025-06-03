@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'Edit Invoice',
 };
 
-// Accept a promise and await it
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params?: Promise<{ id: string }>;
 }) {
-  const { id } = await params; // Await params
+  const id = (await params)?.id;
+  if (!id) notFound();
 
   const [invoice, customers] = await Promise.all([
     fetchInvoiceById(id),
